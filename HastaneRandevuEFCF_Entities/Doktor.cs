@@ -29,5 +29,9 @@ namespace HastaneRandevuEFCF_Entities
         [Display(Name = "Maaş")]
         public decimal Maas { get; set; }
         public virtual List<RandevuBilgileri> RandevuBilgileriList { get; set; }
+        public override string ToString()
+        {
+            return $"Dr. {this.DoktorAdi} {this.DoktorSoyadi}";
+        }
     }
 }
