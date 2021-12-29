@@ -21,6 +21,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
         //Global Alan
         HastaManager hastaManagerim = new HastaManager();
         DoktorManager doktorManagerim = new DoktorManager();
+        RandevuManager rndManager = new RandevuManager();
 
         private void FormRandevuAlma_Load(object sender, EventArgs e)
         {
@@ -82,8 +83,10 @@ namespace HastahaneRandevuEFCF_WinFormUI
             {
                 ServisGroupBoxiniPasiflestir();
                 RandevuTarihVeSaatGroupBoxiniPasiflestir();
+                UC_RandevuSaat1.Doktorum = null;
             }
             DateTimePickeriAyarla(DateTime.Now);
+            UC_RandevuSaat1.Temizle();
         }
         private void ServisGroupBoxiniAktiflestir()
         {
@@ -113,6 +116,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
             }
             listBoxDoktorlar.SelectedIndex = -1;
             DateTimePickeriAyarla(DateTime.Now);
+            UC_RandevuSaat1.Temizle();
         }
 
         private void listBoxDoktorlar_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,16 +125,77 @@ namespace HastahaneRandevuEFCF_WinFormUI
             if (listBoxDoktorlar.SelectedIndex>=0)
             {
                 RandevuTarihVeSaatGroupBoxiniAktiflestir();
+                Doktor seciliDr = listBoxDoktorlar.SelectedItem as Doktor;
+                UC_RandevuSaat1.Doktorum = seciliDr;
             }
             else
             {               
                 RandevuTarihVeSaatGroupBoxiniPasiflestir();
-            }
+                UC_RandevuSaat1.Doktorum = null;
+            }          
         }
 
         private void dateTimePickerRandevuTarihi_ValueChanged(object sender, EventArgs e)
         {
             DateTimePickeriAyarla(dateTimePickerRandevuTarihi.Value);
+            UC_RandevuSaat1.DisaridanGelenTarih = dateTimePickerRandevuTarihi.Value;
+            UC_RandevuSaat1.Temizle();
+        }
+
+        private void btnRandevuAl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listBoxHastalar.SelectedIndex<0)
+                {
+                    MessageBox.Show("Hasta seçmeden randevu işlemleri yapılamaz!");
+                    return;
+                }
+                if (listBoxDoktorlar.SelectedIndex<0)
+                {
+                    MessageBox.Show("Doktor seçmeden randevu işlemleri yapılamaz!");
+                }
+                if (!UC_RandevuSaat1.RandevuAlmaAktifMi)
+                {
+                    MessageBox.Show("Randevu alabilmeniz için yukarıdaki randevu saati butonlarına tıklayarak saat seçmelisiniz","UYARI!",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    return;
+                }
+                //Hastanın o tarihe ait o saatte başka bir randevusu varsa alamaz.
+                Hasta secilenHasta = listBoxHastalar.SelectedItem as Hasta;
+                if (rndManager.HastaninSecilenTarihveSaatteRandevusuVarMi(secilenHasta,UC_RandevuSaat1.SecilenRandevuTarihi))
+                {
+                    MessageBox.Show($"DİKKAT: {UC_RandevuSaat1.SecilenRandevuTarihi.ToString("dd.MM.yyyy HH:mm:ss")} tarihinde başka bir randevunuz vardır. Bu nedenle aynı saate randevu alamazsınız!","UYARI",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    return;
+                }
+                //Hasta randevu alabilir.
+                Doktor secilenDoktor = listBoxDoktorlar.SelectedItem as Doktor;
+                RandevuBilgileri yeniRandevu = new RandevuBilgileri()
+                {
+                    HastaId=secilenHasta.HastaId,
+                    DoktorId=secilenDoktor.DoktorId,
+                    RandevuTarihi=UC_RandevuSaat1.SecilenRandevuTarihi
+                };
+                bool rndAlindiMi = false;
+                rndAlindiMi = rndManager.RandevuyuAl(yeniRandevu);
+                if (rndAlindiMi)
+                {
+                    MessageBox.Show("Randevunuz alınmıştır!","BİLGİ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    //temizlik
+                    UC_RandevuSaat1.Temizle();
+                    dateTimePickerRandevuTarihi.Value = DateTime.Now;
+                    RandevuTarihVeSaatGroupBoxiniPasiflestir();
+                    ServisGroupBoxiniPasiflestir();
+                    listBoxHastalar.SelectedIndex = -1;
+                }
+                else
+                {
+                    throw new Exception("Randevuyu alma işleminde beklenmedik bir hata oluştu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("HATA!" + ex.Message);
+            }
         }
     }
 }

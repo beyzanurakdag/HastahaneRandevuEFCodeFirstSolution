@@ -16,7 +16,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormRandevuAlma());
+            Application.Run(new FormGiris());
         }
     }
 }

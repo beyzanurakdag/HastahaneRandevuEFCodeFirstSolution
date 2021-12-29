@@ -30,15 +30,15 @@ namespace HastahaneRandevuEFCF_WinFormUI
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxSaatler = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxSaatler = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelRandevuButtonlar = new System.Windows.Forms.TableLayoutPanel();
+            this.btn30 = new System.Windows.Forms.Button();
+            this.btn00 = new System.Windows.Forms.Button();
+            this.btn15 = new System.Windows.Forms.Button();
+            this.btn45 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn0015 = new System.Windows.Forms.Button();
-            this.btn1530 = new System.Windows.Forms.Button();
-            this.btn3045 = new System.Windows.Forms.Button();
-            this.btn4500 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelRandevuButtonlar.SuspendLayout();
             this.SuspendLayout();
@@ -59,8 +59,26 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.40541F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(322, 216);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(305, 216);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Saat Seç:";
+            // 
+            // comboBoxSaatler
+            // 
+            this.comboBoxSaatler.FormattingEnabled = true;
+            this.comboBoxSaatler.Location = new System.Drawing.Point(3, 27);
+            this.comboBoxSaatler.Name = "comboBoxSaatler";
+            this.comboBoxSaatler.Size = new System.Drawing.Size(299, 24);
+            this.comboBoxSaatler.TabIndex = 1;
+            this.comboBoxSaatler.SelectedIndexChanged += new System.EventHandler(this.comboBoxSaatler_SelectedIndexChanged);
             // 
             // tableLayoutPanel2
             // 
@@ -75,41 +93,63 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.tableLayoutPanel2.Size = new System.Drawing.Size(8, 13);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // comboBoxSaatler
-            // 
-            this.comboBoxSaatler.FormattingEnabled = true;
-            this.comboBoxSaatler.Location = new System.Drawing.Point(3, 27);
-            this.comboBoxSaatler.Name = "comboBoxSaatler";
-            this.comboBoxSaatler.Size = new System.Drawing.Size(316, 24);
-            this.comboBoxSaatler.TabIndex = 1;
-            this.comboBoxSaatler.SelectedIndexChanged += new System.EventHandler(this.comboBoxSaatler_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Saat Seç:";
-            // 
             // tableLayoutPanelRandevuButtonlar
             // 
             this.tableLayoutPanelRandevuButtonlar.ColumnCount = 2;
             this.tableLayoutPanelRandevuButtonlar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.89743F));
             this.tableLayoutPanelRandevuButtonlar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.10257F));
-            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn3045, 0, 1);
-            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn0015, 0, 0);
-            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn1530, 1, 0);
-            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn4500, 1, 1);
+            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn30, 0, 1);
+            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn00, 0, 0);
+            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn15, 1, 0);
+            this.tableLayoutPanelRandevuButtonlar.Controls.Add(this.btn45, 1, 1);
             this.tableLayoutPanelRandevuButtonlar.Location = new System.Drawing.Point(3, 57);
             this.tableLayoutPanelRandevuButtonlar.Name = "tableLayoutPanelRandevuButtonlar";
             this.tableLayoutPanelRandevuButtonlar.RowCount = 2;
             this.tableLayoutPanelRandevuButtonlar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.51381F));
             this.tableLayoutPanelRandevuButtonlar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.48619F));
-            this.tableLayoutPanelRandevuButtonlar.Size = new System.Drawing.Size(316, 111);
+            this.tableLayoutPanelRandevuButtonlar.Size = new System.Drawing.Size(299, 111);
             this.tableLayoutPanelRandevuButtonlar.TabIndex = 3;
             this.tableLayoutPanelRandevuButtonlar.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
+            // 
+            // btn30
+            // 
+            this.btn30.BackColor = System.Drawing.Color.SeaShell;
+            this.btn30.Location = new System.Drawing.Point(3, 55);
+            this.btn30.Name = "btn30";
+            this.btn30.Size = new System.Drawing.Size(131, 53);
+            this.btn30.TabIndex = 2;
+            this.btn30.Text = "button3";
+            this.btn30.UseVisualStyleBackColor = false;
+            // 
+            // btn00
+            // 
+            this.btn00.BackColor = System.Drawing.Color.SeaShell;
+            this.btn00.Location = new System.Drawing.Point(3, 3);
+            this.btn00.Name = "btn00";
+            this.btn00.Size = new System.Drawing.Size(131, 46);
+            this.btn00.TabIndex = 0;
+            this.btn00.Text = "button1";
+            this.btn00.UseVisualStyleBackColor = false;
+            // 
+            // btn15
+            // 
+            this.btn15.BackColor = System.Drawing.Color.SeaShell;
+            this.btn15.Location = new System.Drawing.Point(140, 3);
+            this.btn15.Name = "btn15";
+            this.btn15.Size = new System.Drawing.Size(154, 46);
+            this.btn15.TabIndex = 1;
+            this.btn15.Text = "button2";
+            this.btn15.UseVisualStyleBackColor = false;
+            // 
+            // btn45
+            // 
+            this.btn45.BackColor = System.Drawing.Color.SeaShell;
+            this.btn45.Location = new System.Drawing.Point(140, 55);
+            this.btn45.Name = "btn45";
+            this.btn45.Size = new System.Drawing.Size(154, 53);
+            this.btn45.TabIndex = 3;
+            this.btn45.Text = "button4";
+            this.btn45.UseVisualStyleBackColor = false;
             // 
             // flowLayoutPanel1
             // 
@@ -117,46 +157,6 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
             this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // btn0015
-            // 
-            this.btn0015.BackColor = System.Drawing.Color.SeaShell;
-            this.btn0015.Location = new System.Drawing.Point(3, 3);
-            this.btn0015.Name = "btn0015";
-            this.btn0015.Size = new System.Drawing.Size(139, 46);
-            this.btn0015.TabIndex = 0;
-            this.btn0015.Text = "button1";
-            this.btn0015.UseVisualStyleBackColor = false;
-            // 
-            // btn1530
-            // 
-            this.btn1530.BackColor = System.Drawing.Color.SeaShell;
-            this.btn1530.Location = new System.Drawing.Point(148, 3);
-            this.btn1530.Name = "btn1530";
-            this.btn1530.Size = new System.Drawing.Size(154, 46);
-            this.btn1530.TabIndex = 1;
-            this.btn1530.Text = "button2";
-            this.btn1530.UseVisualStyleBackColor = false;
-            // 
-            // btn3045
-            // 
-            this.btn3045.BackColor = System.Drawing.Color.SeaShell;
-            this.btn3045.Location = new System.Drawing.Point(3, 55);
-            this.btn3045.Name = "btn3045";
-            this.btn3045.Size = new System.Drawing.Size(139, 53);
-            this.btn3045.TabIndex = 2;
-            this.btn3045.Text = "button3";
-            this.btn3045.UseVisualStyleBackColor = false;
-            // 
-            // btn4500
-            // 
-            this.btn4500.BackColor = System.Drawing.Color.SeaShell;
-            this.btn4500.Location = new System.Drawing.Point(148, 55);
-            this.btn4500.Name = "btn4500";
-            this.btn4500.Size = new System.Drawing.Size(154, 53);
-            this.btn4500.TabIndex = 3;
-            this.btn4500.Text = "button4";
-            this.btn4500.UseVisualStyleBackColor = false;
             // 
             // UC_RandevuSaat
             // 
@@ -166,7 +166,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UC_RandevuSaat";
-            this.Size = new System.Drawing.Size(356, 256);
+            this.Size = new System.Drawing.Size(335, 251);
             this.Load += new System.EventHandler(this.UC_RandevuSaat_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -182,10 +182,10 @@ namespace HastahaneRandevuEFCF_WinFormUI
         private System.Windows.Forms.ComboBox comboBoxSaatler;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelRandevuButtonlar;
-        private System.Windows.Forms.Button btn3045;
-        private System.Windows.Forms.Button btn0015;
-        private System.Windows.Forms.Button btn1530;
+        private System.Windows.Forms.Button btn30;
+        private System.Windows.Forms.Button btn00;
+        private System.Windows.Forms.Button btn15;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btn4500;
+        private System.Windows.Forms.Button btn45;
     }
 }
