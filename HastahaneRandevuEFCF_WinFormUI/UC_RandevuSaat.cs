@@ -38,6 +38,8 @@ namespace HastahaneRandevuEFCF_WinFormUI
             }
             Doktorum = null;
             DRveTrhyeGoreButonlarinAktifPasifIslemleriniYap();
+            timer1.Interval = 1000;
+            timer1.Enabled = true;
         }        
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
@@ -48,6 +50,8 @@ namespace HastahaneRandevuEFCF_WinFormUI
         {
             try
             {
+
+                GecmisSaatlerinButonlariniPasiflestir();
                 if (Doktorum == null)
                 {
                     RandevuButonlariniPasiflestir();
@@ -193,6 +197,42 @@ namespace HastahaneRandevuEFCF_WinFormUI
             RandevuButonlarininIsımleriniTemizle();
             RandevuButonlariniPasiflestir();
             RandevuAlmaAktifMi = false;
+        }       
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            GecmisSaatlerinButonlariniPasiflestir();
+        }
+
+        private void GecmisSaatlerinButonlariniPasiflestir()
+        {
+            foreach (Button btnitem in tableLayoutPanelRandevuButtonlar.Controls)
+            {
+                int dakika = 0;
+                int saat = 0;
+
+                if (btnitem.Text.Length > 3)
+                {
+                    int.TryParse(btnitem.Text.Substring(3, 2), out dakika);
+                    int.TryParse(btnitem.Text.Substring(0, 2), out saat);
+                }
+
+                if (DisaridanGelenTarih.ToShortDateString() == DateTime.Now.ToShortDateString())
+                {
+                    if (saat < DateTime.Now.Hour)
+                    {
+                        btnitem.BackColor = Color.DarkGray;
+                        btnitem.Enabled = false;
+                    }
+                    else if (saat == DateTime.Now.Hour)
+                    {
+
+
+                        btnitem.BackColor = Color.DarkGray;
+                        btnitem.Enabled = false;
+                    }
+                }
+            }
+        
         }
     }
 }

@@ -29,6 +29,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxSaatler = new System.Windows.Forms.ComboBox();
@@ -39,6 +40,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.btn15 = new System.Windows.Forms.Button();
             this.btn45 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelRandevuButtonlar.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +160,10 @@ namespace HastahaneRandevuEFCF_WinFormUI
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UC_RandevuSaat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -187,5 +193,6 @@ namespace HastahaneRandevuEFCF_WinFormUI
         private System.Windows.Forms.Button btn15;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btn45;
+        private System.Windows.Forms.Timer timer1;
     }
 }
