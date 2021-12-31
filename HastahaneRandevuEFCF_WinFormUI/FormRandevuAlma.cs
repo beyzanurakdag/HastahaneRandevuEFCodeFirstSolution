@@ -367,5 +367,10 @@ namespace HastahaneRandevuEFCF_WinFormUI
                 MessageBox.Show("HATA:" +  ex.Message);
             }
         }
+
+        private void tabPageCiktiAl_Leave(object sender, EventArgs e)
+        {
+            comboBoxCiktiAlDrSec.SelectedIndex = -1;
+        }
     }
 }
