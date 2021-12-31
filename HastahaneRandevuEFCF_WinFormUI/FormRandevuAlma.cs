@@ -30,9 +30,10 @@ namespace HastahaneRandevuEFCF_WinFormUI
             RandevuTarihVeSaatGroupBoxiniPasiflestir();
             HastaListeBoxiniDoldur();
             //datetimepicker'ı formatla.
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             //comboBoxCiktiAl
             DoktorlariComboBoxCiktiAlDrSeceDoldur();
+            comboBoxCiktiAlDrSec.SelectedIndex = -1;
         }
 
         private void DoktorlariComboBoxCiktiAlDrSeceDoldur()
@@ -42,13 +43,14 @@ namespace HastahaneRandevuEFCF_WinFormUI
             comboBoxCiktiAlDrSec.DataSource = doktorManagerim.TumAktifDoktorlariGetir();
         }
 
-        private void DateTimePickeriAyarla(DateTime trh)
+        private void DateTimePickeriAyarla()
         {
             dateTimePickerRandevuTarihi.Format = DateTimePickerFormat.Custom;
             dateTimePickerRandevuTarihi.CustomFormat = "dd.MM.yyyy";
-            dateTimePickerRandevuTarihi.MinDate =trh;
+            dateTimePickerRandevuTarihi.MinDate =DateTime.Now;
             dateTimePickerRandevuTarihi.MaxDate = dateTimePickerRandevuTarihi.MinDate.AddDays(15);
-            dateTimePickerRandevuTarihi.Value = trh;
+            dateTimePickerRandevuTarihi.Value = DateTime.Now;
+
             dateTimePickerCiktiAl.Format = DateTimePickerFormat.Custom;
             dateTimePickerCiktiAl.CustomFormat = "dd.MM.yyyy";
             dateTimePickerCiktiAl.MinDate = DateTime.Now;
@@ -99,7 +101,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
                 RandevuTarihVeSaatGroupBoxiniPasiflestir();
                 UC_RandevuSaat1.Doktorum = null;
             }
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             UC_RandevuSaat1.Temizle();
         }
         private void ServisGroupBoxiniAktiflestir()
@@ -129,13 +131,13 @@ namespace HastahaneRandevuEFCF_WinFormUI
                 listBoxDoktorlar.DataSource = null;
             }
             listBoxDoktorlar.SelectedIndex = -1;
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             UC_RandevuSaat1.Temizle();
         }
 
         private void listBoxDoktorlar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             if (listBoxDoktorlar.SelectedIndex>=0)
             {
                 RandevuTarihVeSaatGroupBoxiniAktiflestir();
@@ -151,7 +153,7 @@ namespace HastahaneRandevuEFCF_WinFormUI
 
         private void dateTimePickerRandevuTarihi_ValueChanged(object sender, EventArgs e)
         {
-            DateTimePickeriAyarla(dateTimePickerRandevuTarihi.Value);
+           
             UC_RandevuSaat1.DisaridanGelenTarih = dateTimePickerRandevuTarihi.Value;
             UC_RandevuSaat1.Temizle();
         }
@@ -246,12 +248,17 @@ namespace HastahaneRandevuEFCF_WinFormUI
         {
             try
             {
-                if (comboBoxCiktiAlDrSec.SelectedIndex<0)
+                if (comboBoxCiktiAlDrSec.SelectedIndex>=0)
                 {
-                    throw new Exception("Lütfen doktor seçiniz");
+                    Doktor secilenDr = doktorManagerim.DoktoruIdyeGoreBul((int)comboBoxCiktiAlDrSec.SelectedValue);
+                    CiktiAlButonuAktifPasifliginiAyarla(secilenDr, dateTimePickerCiktiAl.Value);
                 }
-                Doktor secilenDr = doktorManagerim.DoktoruIdyeGoreBul((int)comboBoxCiktiAlDrSec.SelectedValue);
-                CiktiAlButonuAktifPasifliginiAyarla(secilenDr, dateTimePickerCiktiAl.Value);
+                else
+                {
+                    dateTimePickerCiktiAl.Value = DateTime.Now;
+                    btnCiktiAl.Enabled = false;
+                }
+                
             }
             catch (Exception ex)
             {
